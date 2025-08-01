@@ -16,6 +16,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+class FavourRequest(BaseModel):
+    target: str
+    favour: str
+
 class GrudgeRequest(BaseModel):
     target: str
     grudge: str
@@ -66,3 +70,34 @@ async def get_grudges(person: str):
     if not grudges:
         raise HTTPException(status_code=404, detail="No grudges found for this person.")
     return grudges
+
+@app.post('/api/add-favour')
+async def add_favour(favour_req: FavourRequest):
+    person = favour_req.target.title()
+    favour = favour_req.favour
+    past_grudges = database.get_grudges(person)
+    current_score = database.get_score(person)
+
+    gres = groq_c.favour(
+        name=person,
+        favor=favour,
+        past_grudges=past_grudges,
+        current_score=current_score
+    )
+
+    tdy = datetime.datetime.today()
+    created_at = tdy.strftime("%d/%m/%Y")
+    j_favour = {
+        'verdict': gres['verdict'],
+        'emoji': gres['emoji'],
+        'created_at': created_at,
+        "favour": favour,
+        "score": gres['score'],
+    }
+    
+    database.edit_favour(
+        person=person,
+        favour=j_favour
+    )
+    print(gres)
+    return gres

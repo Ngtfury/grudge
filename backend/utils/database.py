@@ -29,7 +29,7 @@ def add_grudge(person, grudge, score):
         "person": person,
         "grudges": [grudge],
         "score": score,
-        "favours": [{}]
+        "favours": []
 
     }
     res = supabase.table("grudges").insert(data).execute()
@@ -56,5 +56,23 @@ def get_scores():
         return [y['score'] for y in res.data]
     else:
         return []
+
+def get_favours(person):
+    res = supabase.table("grudges").select("favours").eq("person", person).execute()
+    if res.data:
+        return res.data[0]['favours']
+    else:
+        return []
+    
+def edit_favour(person, favour):
+    res1 = get_favours(person)
+    res1.append(favour)
+    data = {
+        "favours": res1
+    }
+    res = supabase.table("grudges").update(data).eq("person", person).execute()
+    print("✅ Edited favour:", res.data)
+
+
 
 print(get_grudges("Sreeram"))
