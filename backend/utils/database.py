@@ -9,14 +9,27 @@ SUPABASE_KEY = os.getenv("SUPABASE_KEY")
 
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
-def add_grudge(person, grudge, summary, score, refined):
+def edit_grudge(person, grudge, score):
+    res1 = get_grudges(person)
+    favors = supabase.table("grudges").select("favours").eq("person", person).execute()
+    res1.append(grudge)
     data = {
         "person": person,
-        "grudge": grudge,
-#        "author": author,
-        "summary": summary,
+        "grudges": res1,
         "score": score,
-        "refined": refined
+        "favours": favors.data[0]['favours'] if favors.data else [{}]
+
+    }
+    res = supabase.table("grudges").update(data).eq("person", person).execute()
+    print("✅ Edited:", res.data)
+
+
+def add_grudge(person, grudge, score):
+    data = {
+        "person": person,
+        "grudges": [grudge],
+        "score": score,
+        "favours": [{}]
 
     }
     res = supabase.table("grudges").insert(data).execute()
@@ -26,10 +39,10 @@ def add_grudge(person, grudge, summary, score, refined):
 def get_grudges(person):
     res = supabase.table("grudges").select("*").eq("person", person).execute()
     if res.data:
-        return [y for x,y in res.data[0].items()]
+        return res.data[0]['grudges']
     else:
-        return []                                                                                                                                                                                                                 
-
+        return []
+    
 def get_score(person):
     res = supabase.table("grudges").select("score").eq("person", person).execute()
     if res.data:
@@ -44,3 +57,4 @@ def get_scores():
     else:
         return []
 
+print(get_grudges("Sreeram"))
