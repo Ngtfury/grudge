@@ -1,19 +1,19 @@
 # Python virtual environment
-venv/
+/backend/venv/
 .vscode/
 
 # Environment variables
-.env
+/backend/.env
 
 # Python cache and compiled files
-__pycache__/
+/backend/__pycache__/
 *.py[cod]
 *$py.class
 
 # Distribution / packaging
-.Python
-build/
-dist/
+/backend/.Python
+/backend/build/
+/backend/dist/
 *.egg
 *.egg-info/
 .eggs/
@@ -22,25 +22,25 @@ wheels/
 *.whl
 
 # Unit test / coverage reports
-htmlcov/
-.tox/
-.nox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
+/backend/htmlcov/
+/backend/.tox/
+/backend/.nox/
+/backend/.coverage
+/backend/.coverage.*
+/backend/.cache
+/backend/nosetests.xml
+/backend/coverage.xml
 *.cover
 *.py,cover
-.hypothesis/
-.pytest_cache/
+/backend/.hypothesis/
+/backend/.pytest_cache/
 
 # Jupyter Notebook
-.ipynb_checkpoints/
+/backend/.ipynb_checkpoints/
 
 # Logs
 *.log
-logs/
+/backend/logs/
 
 # OS generated files
 .DS_Store
@@ -55,3 +55,20 @@ Thumbs.db
 .idea/
 *.sublime-workspace
 *.sublime-project
+
+# React frontend
+/frontend/node_modules/
+/frontend/dist/
+/frontend/build/
+/frontend/*.bundle.js
+/frontend/*.bundle.js.map
+/frontend/coverage/
+/frontend/.eslintcache
+/frontend/.parcel-cache/
+/frontend/.next/
+/frontend/out/
+/frontend/.cache/
+/frontend/npm-debug.log
+/frontend/yarn-error.log
+/frontend/yarn.lock
+/frontend/package-lock.json

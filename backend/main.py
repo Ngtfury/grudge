@@ -4,9 +4,17 @@ from typing import List
 import utils.groq_calls as groq_c
 import utils.database as database
 from pydantic import BaseModel
+from fastapi.middleware.cors import CORSMiddleware
+
 
 app = FastAPI()
-
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Or specify your frontend URL
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 class GrudgeRequest(BaseModel):
     target: str
