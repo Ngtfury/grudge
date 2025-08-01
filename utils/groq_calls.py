@@ -1,6 +1,7 @@
 from groq import Groq
 from dotenv import load_dotenv
 import os
+import json
 load_dotenv()
 
 API_KEY = os.getenv("API_KEY")
@@ -10,7 +11,7 @@ client = Groq(
 )
 
 
-def generate_refined_grudge(name, new_grudge, person_history: list, other_people_scores: list, current_score):
+def grudge(name, new_grudge, person_history: list, other_people_scores: list, current_score):
     content = {
   "name": name,
   "new_grudge": new_grudge,
@@ -53,4 +54,52 @@ Also do not return the ```JSON``` With the reply"""
         model="llama-3.3-70b-versatile",
     )
 
-    return chat_completion.choices[0].message.content
+    return json.loads(chat_completion.choices[0].message.content)
+
+
+def favour(name, favor, past_grudges, current_score):
+    content = """You are a sarcastic, emotionally petty AI assistant.
+
+Your job is to roast the USER for even CONSIDERING doing a favor for someone who has betrayed or annoyed them in the past.
+
+You'll be given:
+- The user's grudge history toward a person
+- The favor that person is now asking for
+
+Your tone must be brutally honest, sarcastic, disrespectful, and *roast* the user for being so emotionally weak or naive.
+
+Do NOT attack the person who asked the favor.  
+You are fully targeting the author (the user) for being dumb enough to consider it.
+
+Return a JSON with:
+
+{
+  "verdict": "denied" | "approved",
+  "reply": "<a brutally sarcastic, paragraph-length roast of the author>",
+  "emoji": "<an emoji expressing your disdain>",
+  "score": <float between 0.0 to 100.0>  // updated person grudge score
+}
+dont include the ```JSON``` tag in the reply.  
+
+Only return JSON. No explanations."""
+    cont2 = {
+  "name": name,
+  "favor": favor,
+  "past_grudges": past_grudges,
+  "current_score": current_score
+}
+    chat_completion = client.chat.completions.create(
+    messages=[
+        {
+            'role': "system",
+            "content": content,
+        },
+        {
+            "role": "user",
+            "content": str(cont2)
+        }
+        ],
+        model="llama-3.3-70b-versatile",
+    )
+
+    return json.loads(chat_completion.choices[0].message.content)
