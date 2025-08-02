@@ -1,11 +1,11 @@
 <img width="3188" height="1202" alt="frame (3)" src="https://github.com/user-attachments/assets/517ad8e9-ad22-457d-9538-a9e62d137cd7" />
 
 
-# [Project Name] 🎯
+# [GrudgeGPT: A Grudge Reminder] 🎯
 
 
 ## Basic Details
-### Team Name: [Sreeramachandran S Menon's Team]
+### Team Name: Sreeramachandran S Menon's Team
 
 
 ### Project Description
@@ -22,36 +22,33 @@ GrudgeGPT lets you log every petty betrayal, score it emotionally, and get roast
 ## Technical Details
 ### Technologies/Components Used
 For Software:
-- Python, React
-- [Frameworks used]
-- [Libraries used]
-- [Tools used]
-
-For Hardware:
-- [List main components]
-- [List specifications]
-- [List tools required]
+- Python, Node
+- [React.js, lottie-react, Supabase, Groq API]
 
 ### Implementation
 For Software:
 # Installation
-[commands]
+For backend:
+Run `pip install -r requirements.txt` to install all the packages
 
+For frontend:
+Run `pnpm i` to install all the packages
 # Run
-[commands]
+Run `uvicorn main:app --reload` to run the api
+Run `pnpm start` to run the react app
 
 ### Project Documentation
 For Software:
 
 # Screenshots (Add at least 3)
 <img width="912" height="689" alt="image" src="https://github.com/user-attachments/assets/9160a9a9-3204-4271-80b8-68f3d11656c3" />
-*Add caption explaining what this shows*
+GrudgeGPT is your AI-powered emotional memory. Log every petty betrayal, from ignored texts to stolen snacks, and let the app score, store, and roast accordingly. Whether you're tracking who owes you or deciding if they deserve a favor, GrudgeGPT never forgets — even when you want to.
 
 <img width="912" height="689" alt="image" src="https://github.com/user-attachments/assets/7c08bb23-30a2-465a-ba3b-2cc14efebb1c" />
-*Add caption explaining what this shows*
+The "Add Grudge" feature lets you log a new offense someone committed, like “He canceled plans last minute.” You input the grudge, tag the person, and the app analyzes it, assigning emotional scores like betrayal and annoyance. It then saves the grudge, updates the person’s score, and prepares a dramatic, sarcastic reply for future reference.
 
-<img width="912" height="689" alt="image" src="https://github.com/user-attachments/assets/68cbb03f-fe13-485d-8ea3-3ef31dc43847" />
-*Add caption explaining what this shows*
+<img width="912" height="689" alt="image" src="https://github.com/user-attachments/assets/076f859c-4550-4789-abdf-4997f40a2ee6" />
+The Leaderboard ranks people based on how badly they’ve treated you, using the emotional scores from your logged grudges. The higher the score, the worse their behavior — turning your emotional baggage into a public scoreboard of betrayal. It’s petty, personal, and painfully satisfying.
 
 
 ### Project Demo
