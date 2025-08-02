@@ -55,7 +55,7 @@ function App() {
 
     try {
       // Simulate API call
-      const response = await axios.post("http://127.0.0.1:8000/api/add-grudge", {
+      const response = await axios.post("https://grudge.onrender.com/api/add-grudge", {
         target: target.trim(),
         grudge: grudge.trim(),
       })
@@ -91,7 +91,7 @@ function App() {
     setShowLeaderboard(false) // <-- Ensure leaderboard is hidden
 
     try {
-      const response = await axios.post("http://127.0.0.1:8000/api/add-favour", {
+      const response = await axios.post("https://grudge.onrender.com/api/add-favour", {
         target: favorTarget.trim(),
         favour: favorRequest.trim(),
       })
@@ -126,7 +126,7 @@ function App() {
     if (selectedPerson) {
       try {
         // Use the correct endpoint format
-        const response = await axios.get(`http://127.0.0.1:8000/api/get-score/${encodeURIComponent(selectedPerson)}`)
+        const response = await axios.get(`https://grudge.onrender.com/api/get-score/${encodeURIComponent(selectedPerson)}`)
         score = parseFloat(response.data.score)
       } catch (error) {
         console.error("Error fetching score:", error)
@@ -174,7 +174,7 @@ function App() {
     setShowForgiveDropdown(true)
     setIsLoading(true)
     try {
-      const response = await axios.get("http://127.0.0.1:8000/api/get-people")
+      const response = await axios.get("https://grudge.onrender.com/api/get-people")
       setPeopleList(response.data)
     } catch (error) {
       setResultText("❌ Failed to fetch people list.")
@@ -200,7 +200,7 @@ function App() {
     setResultText("")
     setShowCloseButton(false)
     try {
-      const response = await axios.get("http://127.0.0.1:8000/api/leaderboard")
+      const response = await axios.get("https://grudge.onrender.com/api/leaderboard")
       setLeaderboard(response.data)
     } catch (error) {
       setResultText("❌ Failed to fetch leaderboard.")
