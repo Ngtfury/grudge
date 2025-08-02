@@ -101,3 +101,25 @@ async def add_favour(favour_req: FavourRequest):
     )
     print(gres)
     return gres
+
+@app.get('/api/get-people')
+async def get_people():
+    people = database.get_people()
+    if not people:
+        raise HTTPException(status_code=404, detail="No people found.")
+    return people
+
+
+@app.get('/api/get-score/{person}')
+async def get_score(person: str):
+    score = database.get_score(person.title())
+    if score is None:
+        raise HTTPException(status_code=404, detail="No score found for this person.")
+    return {"person": person.title(), "score": score}
+
+@app.get('/api/leaderboard')
+async def get_leaderboard():
+    leaderboard = database.get_leaderboard()
+    if not leaderboard:
+        raise HTTPException(status_code=404, detail="No leaderboard data found.")
+    return leaderboard

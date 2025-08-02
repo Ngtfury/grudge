@@ -73,6 +73,18 @@ def edit_favour(person, favour):
     res = supabase.table("grudges").update(data).eq("person", person).execute()
     print("✅ Edited favour:", res.data)
 
+def get_people():
+    res = supabase.table("grudges").select("person").execute()
+    if res.data:
+        return [x['person'] for x in res.data]
+    else:
+        return []
 
+def get_leaderboard():
+    res = supabase.table("grudges").select("person, score").order("score", desc=True).execute()
+    if res.data:
+        return res.data
+    else:
+        return []
 
-print(get_grudges("Sreeram"))
+print(get_leaderboard())
